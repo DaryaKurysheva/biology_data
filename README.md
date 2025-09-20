@@ -4,5 +4,6 @@
 Дать название скаченной таблице: biology_data.csv
 Разместить таблицу рядом с запускаемым скриптом
 
-<img width="1097" height="905" alt="image" src="https://github.com/user-attachments/assets/864e0372-9095-4f0c-b27a-bc1d331605e8" />
+<img width="974" height="915" alt="image" src="https://github.com/user-attachments/assets/9caa99f8-65f8-4c5a-afb6-399e108438ff" />
+
 
