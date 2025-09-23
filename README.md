@@ -6,4 +6,9 @@
 
 <img width="974" height="915" alt="image" src="https://github.com/user-attachments/assets/9caa99f8-65f8-4c5a-afb6-399e108438ff" />
 
-
+Установка зависимостей из файла:
+1. скачать файл requirements.txt
+2. устновить зависимости командой:
+pip install -r requirements.txt
+3. Проверить установленные зависимости:
+pip list
