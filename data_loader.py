@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_name = "biology_data.csv"
+file_name = "evolytion.gitignore"
 
 raw_data = pd.read_csv(file_name)
 
