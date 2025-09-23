@@ -7,8 +7,8 @@
 <img width="974" height="915" alt="image" src="https://github.com/user-attachments/assets/9caa99f8-65f8-4c5a-afb6-399e108438ff" />
 
 Установка зависимостей из файла:
-1. Скачать файл requirements.txt
-2. Устновить зависимости командой:
+1. Скачайте файл requirements.txt
+2. Устновите зависимости командой:
 pip install -r requirements.txt
-3. Проверить установленные зависимости:
+3. Проверьте установленные зависимости:
 pip list
