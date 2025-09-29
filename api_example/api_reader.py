@@ -4,6 +4,6 @@ import pandas as pd
 
 res = requests.get(
     url="https://api.gbif.org/v1/species/match/",
-    params={"genus": "Bombus"},
+    params={"species": "Condylostomides terricola"},
 )
 print(res.json())
