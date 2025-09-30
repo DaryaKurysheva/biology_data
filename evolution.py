@@ -1,93 +1,33 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 import pandas as pd
 
+# Чтение данных
+evl = pd.read_csv('data/Evolution_DataSets.csv')
+print(evl)
 
-# In[ ]:
+# Информация о данных
+print(evl.info())
 
+# Типы данных
+print(evl.dtypes)
 
-evl=pd.read_csv('data/Evolution_DataSets.csv')
-evl
+# Преобразование типов
+evl.Location = evl['Location'].astype('category')
+print(evl.dtypes)
 
+# Статистика
+print(evl.describe())
 
-# In[ ]:
+# Еще одно преобразование
+evl.Migrated = evl['Migrated'].astype('object')
+print(evl.dtypes)
 
+# Корреляция
+fields = ['Cranial_Capacity', 'Height']
+print(evl[fields].corr())
 
-evl.info()
-
-
-# In[ ]:
-
-
-evl.dtypes
-
-
-# In[ ]:
-
-
-evl.Location=evl['Location'].astype('category')
-
-
-# In[ ]:
-
-
-evl.dtypes
-
-
-# In[ ]:
-
-
-evl.describe()
-
-
-# In[ ]:
-
-
-evl.Migrated=evl['Migrated'].astype('object')
-
-
-# In[ ]:
-
-
-evl.dtypes
-
-
-# In[ ]:
-
-
-fields=['Cranial_Capacity','Height']
-
-
-# In[ ]:
-
-
-evl[fields].corr
-
-
-# In[ ]:
-
-
-pip install parquet
-
-
-# In[ ]:
-
-
-pip install pyarrow
-
-
-# In[ ]:
-
-
-pip install fastparquet
-
-
-# In[ ]:
-
-
+# Сохранение в parquet
 evl.to_parquet('data/Evolution_DataSets.parquet')
-
+print("Файл сохранен как data/Evolution_DataSets.parquet")
