@@ -1,0 +1,13 @@
+usageKey,scientificName,canonicalName,rank,status,confidence,matchType,kingdom,phylum,order,family,genus,species,kingdomKey,phylumKey,classKey,orderKey,familyKey,genusKey,speciesKey,class
+2436436,"Homo sapiens Linnaeus, 1758",Homo sapiens,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Primates,Hominidae,Homo,Homo sapiens,1,44,359,798,5483,2436435,2436436,Mammalia
+5219173,"Canis lupus Linnaeus, 1758",Canis lupus,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Carnivora,Canidae,Canis,Canis lupus,1,44,359,732,9701,5219142,5219173,Mammalia
+2435035,"Felis catus Linnaeus, 1758",Felis catus,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Carnivora,Felidae,Felis,Felis catus,1,44,359,732,9703,2435022,2435035,Mammalia
+2433433,"Ursus arctos Linnaeus, 1758",Ursus arctos,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Carnivora,Ursidae,Ursus,Ursus arctos,1,44,359,732,9681,2433406,2433433,Mammalia
+5219404,"Panthera leo (Linnaeus, 1758)",Panthera leo,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Carnivora,Felidae,Panthera,Panthera leo,1,44,359,732,9703,2435194,5219404,Mammalia
+5219461,"Elephas maximus Linnaeus, 1758",Elephas maximus,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Proboscidea,Elephantidae,Elephas,Elephas maximus,1,44,359,799,9427,2435351,5219461,Mammalia
+8324617,"Delphinus delphis Linnaeus, 1758",Delphinus delphis,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Cetacea,Delphinidae,Delphinus,Delphinus delphis,1,44,359,733,5314,2440326,8324617,Mammalia
+2480506,"Aquila chrysaetos (Linnaeus, 1758)",Aquila chrysaetos,SPECIES,ACCEPTED,99,EXACT,Animalia,Chordata,Accipitriformes,Accipitridae,Aquila,Aquila chrysaetos,1,44,212,7191147,2877,2480498,2480506,Aves
+3002461,Rosa canina L.,Rosa canina,SPECIES,ACCEPTED,97,EXACT,Plantae,Tracheophyta,Rosales,Rosaceae,Rosa,Rosa canina,6,7707728,220,691,5015,8395064,3002461,Magnoliopsida
+2878688,Quercus robur L.,Quercus robur,SPECIES,ACCEPTED,97,EXACT,Plantae,Tracheophyta,Fagales,Fagaceae,Quercus,Quercus robur,6,7707728,220,1354,4689,2877951,2878688,Magnoliopsida
+5073713,"Drosophila melanogaster Meigen, 1830",Drosophila melanogaster,SPECIES,ACCEPTED,99,EXACT,Animalia,Arthropoda,Diptera,Drosophilidae,Drosophila,Drosophila melanogaster,1,54,216,811,5547,1522683,5073713,Insecta
+11286021,Escherichia coli E,Escherichia coli,SPECIES,ACCEPTED,98,EXACT,Bacteria,Proteobacteria,Enterobacterales,Enterobacteriaceae,Escherichia,Escherichia coli,3,111,362,10801383,4899,3221780,11286021,Gammaproteobacteria

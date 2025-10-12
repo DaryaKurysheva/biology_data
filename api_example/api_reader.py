@@ -1,51 +1,68 @@
 import requests
-from tqdm import tqdm
 import pandas as pd
 
-res = requests.get(
-    url="https://api.gbif.org/v1/species/match/",
-    params={"species": "Condylostomides terricola"},
-)
-print(res.json())
-#чтение в цикле и исправление ошибок
-species_list = [
-    "Homo sapiens", "Canis lupus", "Felis catus", "Ursus arctos", "Panthera leo", 
-    "Elephas maximus", "Delphinus delphis", "Aquila chrysaetos", "Rosa canina", 
-    "Quercus robur", "Drosophila melanogaster", "Escherichia coli"
-] * 10 
-species_list = species_list[:100]
+def get_data(p_url, p_species_component):
+    try:
+        response = requests.get(
+            url=p_url,
+            params={"species": p_species_component},
+        )
+        print(f"Ответ {response.status_code} для {p_species_component} получен")
+        return response.json()
+    except Exception as e:
+        print(f"Ошибка при запросе для {p_species_component}: {e}")
+        return None
 
-results = []
+def work_with_ans_api(p_url, p_species_list):
+    data_list = []
+    for species in p_species_list:
+        data = get_data(p_url, species)
+        if data:
+            data_list.append(data)
+    return data_list
 
-for species in tqdm(species_list):
-    res = requests.get("https://api.gbif.org/v1/species/match/", params={"species": species})
-    data = res.json()
-    data['queried_species'] = species
-    
-    if res.status_code == 200:
-        data['request_status'] = 'success'
-    else:
-        data['request_status'] = f'http_error_{res.status_code}'
-    
-    results.append(data)
+def generate_csv(p_data_list, p_name_csv):
+    if not p_data_list:
+        print("Нет данных для сохранения.")
+        return None
+    ans_df = pd.DataFrame(p_data_list)
 
-df = pd.DataFrame(results)
-print(f"Готово! Записей: {len(df)}")
+    int_columns = ['key', 'nubKey', 'taxonKey', 'confidence']
+    for col in int_columns:
+        if col in ans_df.columns:
+            ans_df[col] = pd.to_numeric(ans_df[col], errors='coerce', downcast='integer')
 
-print("\nСтатусы запросов:")
-status_counts = df['request_status'].value_counts()
-for status, count in status_counts.items():
-    print(f"{status}: {count} записей") 
-#приведение типов
-df['confidence'] = pd.to_numeric(df['confidence'], errors='coerce')
-df['matchType'] = df['matchType'].astype(str)
-df['kingdom'] = df['kingdom'].astype(str)
-df['phylum'] = df['phylum'].astype(str)
-df['class'] = df['class'].astype(str)
-df['order'] = df['order'].astype(str)
-df['family'] = df['family'].astype(str)
-df['genus'] = df['genus'].astype(str)
-df['species'] = df['species'].astype(str)
-df['status'] = df['status'].astype(str)
-df['queried_species'] = df['queried_species'].astype(str)
-df['request_status'] = df['request_status'].astype(str)
+    str_columns = ['scientificName', 'canonicalName', 'rank', 'taxonomicStatus',
+                   'kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species', 'matchType', 'status']
+    for col in str_columns:
+        if col in ans_df.columns:
+            ans_df[col] = ans_df[col].astype('string', errors='ignore')
+
+    bool_columns = ['synonym']
+    for col in bool_columns:
+        if col in ans_df.columns:
+            ans_df[col] = ans_df[col].astype('boolean', errors='ignore')
+
+    ans_df.to_csv(p_name_csv, index=False)
+    print(f"Данные сохранены в {p_name_csv} ({len(ans_df)} записей).")
+    return ans_df
+
+
+
+def main():
+    url = "https://api.gbif.org/v1/species/match/"
+    species_list = [
+        "Homo sapiens", "Canis lupus", "Felis catus", "Ursus arctos", "Panthera leo",
+        "Elephas maximus", "Delphinus delphis", "Aquila chrysaetos", "Rosa canina",
+        "Quercus robur", "Drosophila melanogaster", "Escherichia coli"
+    ]
+    data_list = work_with_ans_api(url, species_list)
+    print("Полученный список записей")
+    print(data_list)
+    df = generate_csv(data_list, "species.csv")
+    print(df.head(5))
+    print(df.info())
+
+
+if __name__ == "__main__":
+    main()
