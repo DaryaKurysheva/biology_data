@@ -13,6 +13,18 @@ def get_data(p_url, p_species_component):
         print(f"Ошибка при запросе для {p_species_component}: {e}")
         return None
 
+def get_data_list(p_url, p_limit):
+    try:
+        response = requests.get(
+            url=p_url,
+            params={"limit": p_limit},
+        )
+        print(f"Получено {response.status_code}. Длина списка: {len(response.json())}")
+        return response.json()
+    except Exception as e:
+        print(f"Ошибка при запросе для лимита {p_limit}: {e}")
+        return None
+
 def work_with_ans_api(p_url, p_species_list):
     data_list = []
     for species in p_species_list:
@@ -50,13 +62,20 @@ def generate_csv(p_data_list, p_name_csv):
 
 
 def main():
-    url = "https://api.gbif.org/v1/species/match/"
-    species_list = [
-        "Homo sapiens", "Canis lupus", "Felis catus", "Ursus arctos", "Panthera leo",
-        "Elephas maximus", "Delphinus delphis", "Aquila chrysaetos", "Rosa canina",
-        "Quercus robur", "Drosophila melanogaster", "Escherichia coli"
-    ]
-    data_list = work_with_ans_api(url, species_list)
+    # По списку
+    # url = "https://api.gbif.org/v1/species/match/"
+    # species_list = [
+    #     "Homo sapiens", "Canis lupus", "Felis catus", "Ursus arctos", "Panthera leo",
+    #     "Elephas maximus", "Delphinus delphis", "Aquila chrysaetos", "Rosa canina",
+    #     "Quercus robur", "Drosophila melanogaster", "Escherichia coli"
+    # ]
+    # data_list = work_with_ans_api(url, species_list)
+
+    # Получить список сразу
+    url = "https://api.gbif.org/v1/species/"
+    limit = 10
+    data_list = get_data_list(url, limit)
+    data_list = data_list['results']
     print("Полученный список записей")
     print(data_list)
     df = generate_csv(data_list, "species.csv")
