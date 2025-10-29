@@ -1,0 +1,15 @@
+# biology_data
+Данный репозиторий создан с целью освоения дисциплины "Инжиниринг данных".
+Dataset "Набор данных об эволюции человека" анализируем в данной практике можно получить по ссылке: https://drive.google.com/file/d/1PNi71lbKo0gRbMaGzFxfAuxeaiUZLJmm/view?usp=drive_link
+Для работы программы необходимо скачать таблицу (https://drive.google.com/file/d/1PNi71lbKo0gRbMaGzFxfAuxeaiUZLJmm/view?usp=drive_link)
+Дать название скаченной таблице: biology_data.csv
+Разместить таблицу рядом с запускаемым скриптом
+
+<img width="974" height="915" alt="image" src="https://github.com/user-attachments/assets/9caa99f8-65f8-4c5a-afb6-399e108438ff" />
+
+Установка зависимостей из файла:
+1. Скачайте файл requirements.txt
+2. Устновите зависимости командой:
+pip install -r requirements.txt
+3. Проверьте установленные зависимости:
+pip list
