@@ -1,15 +1,32 @@
 # biology_data
 Данный репозиторий создан с целью освоения дисциплины "Инжиниринг данных".
-Dataset "Набор данных об эволюции человека" анализируем в данной практике можно получить по ссылке: https://drive.google.com/file/d/1PNi71lbKo0gRbMaGzFxfAuxeaiUZLJmm/view?usp=drive_link
-Для работы программы необходимо скачать таблицу (https://drive.google.com/file/d/1PNi71lbKo0gRbMaGzFxfAuxeaiUZLJmm/view?usp=drive_link)
-Дать название скаченной таблице: biology_data.csv
-Разместить таблицу рядом с запускаемым скриптом
 
-<img width="974" height="915" alt="image" src="https://github.com/user-attachments/assets/9caa99f8-65f8-4c5a-afb6-399e108438ff" />
+Dataset "Набор данных об эволюции человека" анализируемый в данной практике можно получить по ссылке: https://drive.google.com/file/d/1PNi71lbKo0gRbMaGzFxfAuxeaiUZLJmm/view?usp=drive_link
 
+Разместить таблицу в корне проекта
+## Установка зависимостей
 Установка зависимостей из файла:
 1. Скачайте файл requirements.txt
 2. Устновите зависимости командой:
 pip install -r requirements.txt
 3. Проверьте установленные зависимости:
 pip list
+
+Пакет **etl** реализует полный цикл **Extract → Transform → Load**  
+для обработки и загрузки данных в базу PostgreSQL.
+
+
+## Запуск ETL-процесса
+Запуск из командной строки:
+
+`python -m etl.main --input data/species.csv
+`
+## Описание модулей
+
+| Модуль                          | Назначение                                                                          |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| **extract.py**                  | Загружает исходные CSV-данные, выполняет валидацию и сохраняет копию в `data/raw/`. |
+| **transform.py**                | Преобразует данные: приведение типов, статистика, корреляция.                       |
+| **load.py**                     | Сохраняет обработанные данные в `.parquet` и загружает их в PostgreSQL.             |
+| **main.py**                     | Управляет процессом ETL и предоставляет CLI-интерфейс (`--input`).                  |
+
