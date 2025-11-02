@@ -3,3 +3,4 @@ data
 /*.db
 *.parquet
 /api_example/tempCodeRunnerFile.py
+*.csv
