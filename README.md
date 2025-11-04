@@ -12,6 +12,10 @@ pip install -r requirements.txt
 3. Проверьте установленные зависимости:
 pip list
 
+## Установка переменных окружения
+1. Скопируйте example.env в .env
+2. Заполните данные
+
 Пакет **etl** реализует полный цикл **Extract → Transform → Load**  
 для обработки и загрузки данных в базу PostgreSQL.
 
@@ -19,7 +23,7 @@ pip list
 ## Запуск ETL-процесса
 Запуск из командной строки:
 
-`python -m etl.main --input data/species.csv
+`python -m etl.main --input **путь к файлу**
 `
 ## Описание модулей
 

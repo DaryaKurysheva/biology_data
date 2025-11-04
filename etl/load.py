@@ -2,6 +2,15 @@ import os
 import sqlite3
 import pandas as pd
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+from typing import Final
+
+def _require_env(name: str) -> str:
+    """Читает переменную окружения и гарантирует, что она не None."""
+    val = os.getenv(name)
+    if val is None or val == "":
+        raise ValueError(f"Переменная окружения {name} не задана")
+    return val
 
 def save_to_parquet(df: pd.DataFrame, output_name: str = "Evolution_DataSets.parquet") -> str:
     """
@@ -18,28 +27,23 @@ def save_to_parquet(df: pd.DataFrame, output_name: str = "Evolution_DataSets.par
 
 def load_to_postgres(df: pd.DataFrame, creds_path: str = "creds.db", table_name: str = "kurysheva"):
     """
-    Загружает DataFrame в PostgreSQL.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Данные для загрузки.
-    creds_path : str
-        Путь к SQLite базе с доступами.
-    table_name : str
-        Название таблицы для записи.
+    Загружает DataFrame в PostgreSQL, используя переменные окружения:
+    DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
     """
     print("Подключение к PostgreSQL...")
+    load_dotenv()
 
-    conn = sqlite3.connect(creds_path)
-    cursor = conn.cursor()
-    cursor.execute("SELECT url, port, user, pass FROM access LIMIT 1;")
-    url, port, user, password = cursor.fetchone()
-    conn.close()
+    DB_HOST: Final[str] = _require_env("DB_HOST")
+    DB_PORT: Final[str] = _require_env("DB_PORT")
+    DB_NAME: Final[str] = _require_env("DB_NAME")
+    DB_USER: Final[str] = _require_env("DB_USER")
+    DB_PASSWORD: Final[str] = _require_env("DB_PASSWORD")
 
-    dbname = "homeworks"
-    connection_str = f"postgresql+psycopg2://{user}:{password}@{url}:{port}/{dbname}"
-    print(f"Строка подключения: {connection_str}")
+    print(f"Подключение к PostgreSQL по адресу {DB_HOST}:{DB_PORT}...")
+
+    connection_str = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    connection_str_masked = f"postgresql+psycopg2://{DB_USER}:{'***'}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    print(f"Строка подключения: {connection_str_masked}")
 
     engine = create_engine(connection_str)
     connection = engine.connect()
